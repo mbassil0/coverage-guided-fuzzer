@@ -1,0 +1,29 @@
+﻿  debugger.cpp
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(128): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'void *'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(128): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 2 has type 'unsigned long'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(128): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 3 has type 'DWORD'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(167): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type 'uintptr_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(167): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 2 has type 'uintptr_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(173): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type 'DWORD'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(222): warning C4778: 'printf' : unterminated format string '% \n'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(222): warning C4474: 'printf' : too many arguments passed for format string
+  c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(222): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(280): warning C4244: 'initializing': conversion from 'std::streamoff' to 'size_t', possible loss of data
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(305): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type 'size_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(310): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type 'uintptr_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(428): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 2 has type 'uintptr_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(614): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type 'uint32_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(615): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type 'size_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(732): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type 'DWORD'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\debugger.cpp(747): warning C4477: 'printf' : format string '%p' requires an argument of type 'void *', but variadic argument 5 has type 'uintptr_t'
+  fuzzer.cpp
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\fuzzer.cpp(75): warning C4305: '=': truncation from 'int' to 'uint8_t'
+c:\users\b\desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\attachable coverage guided fuzzing css\fuzzer.cpp(75): warning C4309: '=': truncation of constant value
+  helper_functions.cpp
+  main.cpp
+  Generating code
+  769 of 777 functions (99.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  attachable coverage guided fuzzing css.vcxproj -> C:\Users\b\Desktop\new_fuzzer\fuzzer code\attachable coverage guided fuzzing css version 2\Release\attachable coverage guided fuzzing css.exe

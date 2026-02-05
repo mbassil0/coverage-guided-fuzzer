@@ -1,0 +1,38 @@
+
+Toujuors etre dans le meme dossier que coverage guided fuzzer.exe: cd "C:\Users\b\source\repos\coverage guided fuzzer\Release\"
+
+
+Organisation de dossiers:
+
+Utilisation du script python:
+
+
+
+
+
+
+
+Utilisation de coverage guided fuzzer:
+
+	Etape 1 il faut etre dans le meme dossier que le programme si on le lance de la console 
+	c'est à dire il faut absoluemnt faire cd C:\Users\b\source\repos\coverage guided fuzzer\Release>
+
+
+
+
+
+
+Pour fuzz srcds:
+
+
+
+
+
+note from intel's manual:  The INT 3 instruction generates a special one byte opcode (CC) that is intended for calling the debug exception  handler. 
+(This one byte form is valuable because it can be used to replace the first byte of any instruction with a breakpoint, including other one byte instructions, without over-writing other code).
+
+
+Sources used to write the fuzzer:
+	* Gamozo's mesos
+	* some article on breakpoints
+
