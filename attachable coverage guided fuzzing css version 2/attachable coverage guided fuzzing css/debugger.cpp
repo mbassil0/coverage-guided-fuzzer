@@ -9,14 +9,7 @@
 #include <Windows.h>
 
 #include "helper_functions.h"
-/*
-use smart data structures and dotn copy paste rewrite it au pire
 
-
-todo injecte un programme qui copie/ecrit memorty dans le programme super vite
-tester si Áa marche sur harness qui a loop infinie et ou harness laod le programe qu'on pause
-mais harness est loop infinie tester sur Áa test snapshot et file hook aussi
-*/
 
 
 
@@ -301,7 +294,7 @@ bool debugger::add_breakpoints_from_file(std::string module_name, uintptr_t base
 
 	flush_instruction_cache();
 
-	//todo prendre en compte bp double les supprimer sinon Áa fait del ap lace prise pour rien
+	//todo prendre en compte bp double les supprimer sinon √ßa fait del ap lace prise pour rien
 	printf("Got %p breakopints for module: %s \n", file_size / 4, module_name.c_str()); //c'est /4 car on est en 32 bit en 64bit c'est /8 car le fichier stock les bp sous forme de pointer de (32 ou 64) bytes
 
 	free(addr_of_where_to_place_bp);
@@ -449,7 +442,7 @@ void debugger::handle_loop_mode(uint8_t *status_shared_buffer, uint8_t *second_s
 {
 	/*
 	status buffer se charge de communiquer le status du fuzzer avec l'harness.
-	second_shared_buffer communique les donnÈes
+	second_shared_buffer communique les donn√©es
 	*/
 	
 	
@@ -596,7 +589,7 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 					add_breakpoints_from_file("server.dll", get_module_base(GetProcessId(m_proc), "server.dll"));
 				
 					printf("shared size is %d \n ", data_manager.get_size());
-					*(size_t*)shared_buffer = data_manager.get_size(); // on communique a l'harness le size des donnÈes qu'on veut fuzz
+					*(size_t*)shared_buffer = data_manager.get_size(); // on communique a l'harness le size des donn√©es qu'on veut fuzz
 					
 					printf("waiting for second shared buffer to be created .. \n");
 
@@ -625,7 +618,7 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 				//
 
 
-				continue; //oblige de faire Áa sinon dans le cas ou on a un debug event il sera run plusieurs fois si on ne met pas le continue ici
+				continue; //oblige de faire √ßa sinon dans le cas ou on a un debug event il sera run plusieurs fois si on ne met pas le continue ici
 			}
 			//else
 				//printf("WaitForDebugEvent got the error \n ", GetLastError());
@@ -641,8 +634,8 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 		constantSizeDataManager data_manager;
 
 
-			//note on est oblige d'ajouter les bp pour un fichier (c‡d appeler add_breakpoints_from_file) avant que le module 
-			//ou on veut add les bp soit load c‡d on peut pas juste attacher a un process qui a deja load ce module 
+			//note on est oblige d'ajouter les bp pour un fichier (c√†d appeler add_breakpoints_from_file) avant que le module 
+			//ou on veut add les bp soit load c√†d on peut pas juste attacher a un process qui a deja load ce module 
 			//et essayer d'ajouter les bp ca va crash
 
 
@@ -786,7 +779,7 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 }
 
 /*
-mettre bp dans la func qui rewrite l'opcode jeregarde si Áa le modifie en lisant la memoire avec reclass ou quoi
+mettre bp dans la func qui rewrite l'opcode jeregarde si √ßa le modifie en lisant la memoire avec reclass ou quoi
 
 //while ( ) on check si l'iteration est finie si elle est finie on retourne si on a detecte des nouveaux path
 	{
@@ -811,5 +804,6 @@ mettre bp dans la func qui rewrite l'opcode jeregarde si Áa le modifie en lisant
 /*
 
 got access violation at 78ED0E70 (002F0E70)  in file server.dll
+
 
 */
