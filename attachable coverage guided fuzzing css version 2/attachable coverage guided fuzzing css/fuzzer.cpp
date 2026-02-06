@@ -2,12 +2,6 @@
 #include <string>
 #include <Windows.h>
 
-/*
-void fuzzer::add_file_to_interesting_inputs()
-{
-	//interesting inputs c'est corpus en fait le nom officiel?
-}*/
-
 
 
 
@@ -45,7 +39,7 @@ uint8_t *constantSizeDataManager::mutate_data(size_t number_of_bytes_to_mutat, u
 {
 	/*
 		returns the mutated data
-		pas oublier de register au moins un input (qui peut valoir 0) sinon ça va crash si m_data.size() vaut 0
+		pas oublier de register au moins un input (qui peut valoir 0) sinon Ã§a va crash si m_data.size() vaut 0
 
 		NOTE m_data ne peut pas etre vide ou ca va crash
 	*/
@@ -53,7 +47,7 @@ uint8_t *constantSizeDataManager::mutate_data(size_t number_of_bytes_to_mutat, u
 
 
 
-	memcpy(out_buffer, m_data[rand_idx], m_data_size); //on choisit une donnée a mutate parmis celle qu'on a enregistrée (càd celle qui nous donnes des path interessant pour fuzz)
+	memcpy(out_buffer, m_data[rand_idx], m_data_size); //on choisit une donnÃ©e a mutate parmis celle qu'on a enregistrÃ©e (cÃ d celle qui nous donnes des path interessant pour fuzz)
 
 	/*for (size_t i = 0; i < number_of_bytes_to_mutat; i++)
 	{
@@ -192,4 +186,5 @@ uint8_t *constantSizeDataManager::register_and_set_data_size_input_from_file(con
 	*original_size = size;
 	m_data_size = size;
 	return map_input;
+
 }
