@@ -245,11 +245,6 @@ bool debugger::add_breakpoints_from_file(std::string module_name, uintptr_t base
 	ex pour un fichier contenant 2 fois le chiffre 0x00118E5 ca nous donne:
 	E5 18 01 00 E5 18 01 00
 
-
-	todo appeller ca seulement a l'initialisation du programme avant le snapshot sinon on doit ajouter des bp pour rien
-	ca fait perdre cpu time initialiser qu'une seule fois
-	
-	todo rename add_module_breakpoints_fro_file?
 	*/
 	if (module_name != "server.dll")
 		return false;
@@ -396,7 +391,6 @@ bool debugger::on_breakpoint_hit(LPDEBUG_EVENT debug_event, uint8_t* shared_buff
 	if (remove_breakpoint((uintptr_t)bp_address, tid)) //si c'est un de mes bp je le supprime pcq on va quand meme save les input qui permetter de prendre ce path la
 	{
 		//add_file_to_interesting_inputs
-		//printf("was in the list for %s \n", filename);
 		res = true;
 	}
 
@@ -446,20 +440,10 @@ void debugger::handle_loop_mode(uint8_t *status_shared_buffer, uint8_t *second_s
 	*/
 	
 	
-    // mon systeme doit pouvoir etre synch completement je dois pouvoir recuperer l'input pour save les bp
 	static bool has_iteration_started = false;
 	static auto start_time = std::chrono::steady_clock::now();
-
-	//printf("%p   %d   \n ", status_shared_buffer[0], has_iteration_started);
-
-
 	if (!has_iteration_started && status_shared_buffer[0] == 'R')
 	{
-
-
-		//this function needs a state is reading is doing car si je sleep dans cette fonction alors je ne peux pas sortir et remove les bp
-		
-
 		*was_new_bp_hit_during_iteration = false; //on met was_new_bp_hit_during_iteration pour la nouvelle iteration
 		data_manager->mutate_data(m_number_of_bytes_to_mutate, second_shared_buffer);
 
@@ -470,7 +454,7 @@ void debugger::handle_loop_mode(uint8_t *status_shared_buffer, uint8_t *second_s
 
 		std::chrono::duration<double> elapsed_seconds = std::chrono::steady_clock::now() - start_time;
 		printf("sstarting iteration: it: %d  size: %d  we are running at: %f iterations/sec %d  \n", m_it, data_manager->m_data.size(), (double)m_it / elapsed_seconds.count(), status_shared_buffer[0]);
-		//if (m_is_master_debugger&& g_it_ctr % 1000 == 1)  
+		
 		if (m_it % 1000 == 1)
 		{
 
@@ -497,23 +481,7 @@ void debugger::handle_loop_mode(uint8_t *status_shared_buffer, uint8_t *second_s
 
 bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t *shared_buffer, size_t shared_buffer_size, std::string first_shared_buffer_name)
 {
-	/*
-	detects if the program crashed or if a new bp was reached
-	called when we are fuzzing in loop mode in the harness if we are not in loop mode call run_debugger instead
-
-	loop mode is when the harness runs in a loop and calls the function to fuzz in that loop until it crashes basically the harness does
-	while(1)
-		input = mutate_input ()
-		fuzz_function(input)
-
-	exit_code is filled only if it crashes  otherwises its value will be 0x1336
-
-
-
-	first shared_buffer is also called status_shared_buffer and indicates the status 
-	the second shared buffer contains the data that we fuzz
-
-	*/
+	
 
 
 	DEBUG_EVENT debug_event;
@@ -532,9 +500,6 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 
 	size_t original = 3000;
 	constantSizeDataManager data_manager;
-	
-	//size_t it = 0; //voir deja si it est sync todo noter it dans sharedbuffer le premier byte ?
-
 	
 	const char original_map_name[] = "C:\\Users\\b\\source\\repos\\coverage guided fuzzer\\Release\\cstrike\\maps\\original\\original_mysecondmap_og.nav";
 	//const char original_map_name[] = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Source\\cstrike\\\maps\\cs_militia.nav";
@@ -593,11 +558,6 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 					
 					printf("waiting for second shared buffer to be created .. \n");
 
-			
-					
-					
-					
-
 					printf("got the second shared buffer %p  \n ", *(uint32_t*)second_shared_buffer);
 					printf("size of shared buffer: %p  the harnes should be ready to be fuzzed now \n ", *(size_t*)shared_buffer);
 					has_been_initialised = true;
@@ -611,11 +571,6 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 					
 				}
 
-
-
-				//else if (has_been_initialised == false )
-				//	printf("has been initialised %d %p \n", has_been_initialised, *(uint32_t*)shared_buffer);
-				//
 
 
 				continue; //oblige de faire ça sinon dans le cas ou on a un debug event il sera run plusieurs fois si on ne met pas le continue ici
@@ -632,11 +587,6 @@ bool debugger::run_debugger_in_loop_mode(HANDLE proc, DWORD *exit_code, uint8_t 
 
 		size_t original = 3000;
 		constantSizeDataManager data_manager;
-
-
-			//note on est oblige d'ajouter les bp pour un fichier (càd appeler add_breakpoints_from_file) avant que le module 
-			//ou on veut add les bp soit load càd on peut pas juste attacher a un process qui a deja load ce module 
-			//et essayer d'ajouter les bp ca va crash
 
 
 
@@ -807,3 +757,4 @@ got access violation at 78ED0E70 (002F0E70)  in file server.dll
 
 
 */
+
