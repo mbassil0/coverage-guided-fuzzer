@@ -37,14 +37,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 
 
 
-
-
-
-/*
-how can i make this function behave the way i want thats what hackers think
-*/
-
-
 #include <chrono>
 #include "detour_hooks.h"
 #include "sdk.h"
@@ -73,7 +65,7 @@ uint8_t *mutate_data(uint8_t* data_to_mutate, size_t data_length, size_t number_
 	*/
 	
 
-	if (res == nullptr) //on fait Áa pour pas devoir alloc a chaque fois qu'on appelle mutate_dataattention si datalength change!
+	if (res == nullptr) //on fait √ßa pour pas devoir alloc a chaque fois qu'on appelle mutate_dataattention si datalength change!
 		res = (uint8_t*)malloc(data_length);
 
 	*output_size = data_length;
@@ -166,11 +158,7 @@ uint8_t *get_initial_input(const char*file_to_open, size_t *original_size)
 
 uint8_t *get_shared_buffer(std::string shared_buffer_name, size_t buffer_size)
 {
-	//LPSTR thread_number = GetCommandLineA(); //vu qu'on injecte on utilise pas GetCommandLineA
 	
-	//std::string shared_buffer_name = "Local\\fuzzer1";
-	//shared_buffer_name += thread_number;
-
 	printf("opening the fuzzer %s  \n \n", shared_buffer_name.c_str());
 
 	HANDLE h = OpenFileMapping(FILE_MAP_ALL_ACCESS, 0, shared_buffer_name.c_str());
@@ -206,8 +194,6 @@ size_t g_thread_number = 0;
 
 void write_to_address(char *address, char* to_write, size_t size)
 {
-	//vu que memcpy_s est difficile a debug....
-	//printf("write_to_address: writing at %p  cnav loadd: %p  \n ", address, (byte*)GetModuleHandle("server.dll") + 0x2F0569);
 
 	for (int i = 0; i < size; i++)
 	{
@@ -233,9 +219,6 @@ const uint32_t ready_message = 0xDEAD0000; //message que le harness mais dnas le
 void run_fuzzer_for_nav_files()
 {
 	//this function fuzzes CNavMesh::Load
-	
-	
-
 	void *cnavmesh_load = (byte*)GetModuleHandle("server.dll") + 0x002F04F0;
 	void *ecx_addr = *(byte**)((byte*)GetModuleHandle("server.dll") + 0x592A20);
 
@@ -262,7 +245,7 @@ void run_fuzzer_for_nav_files()
 
 	size_t original_nav_file_size = *(size_t*)shared_buffer;
 	 
-	uint8_t *second_shared_buffer = get_shared_buffer(shared_buffer_name + 'b', original_nav_file_size); //le buffer avec lequel on va communiquer les donnÈes
+	uint8_t *second_shared_buffer = get_shared_buffer(shared_buffer_name + 'b', original_nav_file_size); //le buffer avec lequel on va communiquer les donn√©es
 	 
 	uint8_t *map_buffer = (byte*)malloc(original_nav_file_size); //obliger de faire ca sinon ca reste stuck quand j'appelle cnavmesh_load jsp pq 
 	
@@ -432,7 +415,7 @@ void init(HINSTANCE hInstance, HINSTANCE a, LPSTR lpCmdLine, int nCmdShow)
 
 
 	//bytepatch(); cetait que utilise pr le fuzzer qui lancait from scratch ca je pense
-	//on hook eng->Load() (CEngine::Load) je crois. apres que 0x1ffa0 ait ÈtÈ appelÈ dans CModAppSystemGroup::Main
+	//on hook eng->Load() (CEngine::Load) je crois. apres que 0x1ffa0 ait √©t√© appel√© dans CModAppSystemGroup::Main
 	//OgCAppSystemGroup_InitSystems = (Fn)detour.detour((byte*)LoadLibrary("bin\\engine.dll")+0x1FFAF0, on_css_initialization_done);
 
 
@@ -444,4 +427,5 @@ void init(HINSTANCE hInstance, HINSTANCE a, LPSTR lpCmdLine, int nCmdShow)
 
 	//bphere();
 	
+
 }
