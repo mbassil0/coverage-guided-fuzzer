@@ -32,7 +32,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 
 
 	}
-	return TRUE;//voir diff entre return true et false
+	return TRUE;
 }
 
 
@@ -429,3 +429,4 @@ void init(HINSTANCE hInstance, HINSTANCE a, LPSTR lpCmdLine, int nCmdShow)
 	
 
 }
+
