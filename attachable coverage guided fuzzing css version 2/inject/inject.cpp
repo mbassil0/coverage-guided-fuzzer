@@ -67,7 +67,8 @@ bool LoadLibraryInjection(const char *sProcessName, const char *sDllPath)
 	CloseHandle(hThread);
 	VirtualFreeEx(hProcess, pszLibFileRemoteAddr, cb, MEM_RELEASE); 
 	CloseHandle(hProcess);
-	printf("yea");
+
 	return true;
 }
+
 
