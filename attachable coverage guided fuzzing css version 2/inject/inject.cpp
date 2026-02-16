@@ -13,14 +13,14 @@ static HANDLE FindProcessHandle(const char *szProcessName)
 
 		if (hProcess != NULL)
 		{
-			char sNameOfCurrentProcess[MAX_PATH];//dans GetModuleBaseName pas besoin de diviser(le troisieme param)vu que j'utilise char, si j'utilisais unicode je devrais diviser vu que c'est size en nombre de charactères
+			char sNameOfCurrentProcess[MAX_PATH];
 			if (!GetModuleBaseNameA(hProcess, NULL, sNameOfCurrentProcess, sizeof(sNameOfCurrentProcess)))
 				printf("GetModuleBaseName failed %d \n", GetLastError());
 
 
 			if (!strcmp(szProcessName, sNameOfCurrentProcess))
 				return hProcess;
-			//printf("%s \n", sNameOfCurrentProcess);
+		
 		}
 
 		CloseHandle(hProcess);
@@ -51,7 +51,7 @@ bool LoadLibraryInjection(const char *sProcessName, const char *sDllPath)
 
 
 
-	PTHREAD_START_ROUTINE pfnThreadRtn = (PTHREAD_START_ROUTINE)GetProcAddress(GetModuleHandle(TEXT("Kernel32")), "LoadLibraryA"); //PAS OUBLIE DE CHANGER LE LOADLIBRARYA /LOADLIBRARYW SELON MES BESOINS
+	PTHREAD_START_ROUTINE pfnThreadRtn = (PTHREAD_START_ROUTINE)GetProcAddress(GetModuleHandle(TEXT("Kernel32")), "LoadLibraryA"); 
 	if (!pfnThreadRtn)
 		return false;
 
@@ -65,8 +65,9 @@ bool LoadLibraryInjection(const char *sProcessName, const char *sDllPath)
 
 
 	CloseHandle(hThread);
-	VirtualFreeEx(hProcess, pszLibFileRemoteAddr, cb, MEM_RELEASE); //je ne pense pas que ça marche mais bon pas grave
+	VirtualFreeEx(hProcess, pszLibFileRemoteAddr, cb, MEM_RELEASE); 
 	CloseHandle(hProcess);
 	printf("yea");
 	return true;
 }
+
