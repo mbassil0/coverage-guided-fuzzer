@@ -55,26 +55,13 @@ int main()
 {
 
 	FILE* f;
-	/*AllocConsole();
-	freopen_s(&f, "CONIN$", "r", stdin);
-	freopen_s(&f, "CONOUT$", "w", stdout);
-	freopen_s(&f, "CONOUT$", "w", stderr);*/
+
 	printf("aa");
 	inject_fuzzer_to_client();
 
-	/*	bool shoud_exit = false;
 
-		while (shoud_exit == false)
-		{
-
-			//if (srcs isnt running)
-			{
-				on_srcds_crash();
-				run_srcds();
-			}
-			Sleep(1000);
-		}*/
 
 }
+
 
 
